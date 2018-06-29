@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const BabelMinifyWebpackPlugin = require('babel-minify-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 const utils = require('./utils')
 const { dependencies } = require('../app/package')
@@ -85,6 +86,7 @@ let config = {
     }
   },
   plugins: [
+    new VueLoaderPlugin(),
     new ExtractTextWebpackPlugin('style.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
