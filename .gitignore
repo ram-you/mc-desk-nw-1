@@ -3,4 +3,5 @@ releases/
 dist/
 buildFolder/
 cache/
+package-lock.json
 
