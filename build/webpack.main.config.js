@@ -4,6 +4,8 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BabelMinifyWebpackPlugin = require('babel-minify-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
@@ -23,6 +25,7 @@ let config = {
     path: path.join(__dirname, '../dist/main'),
     filename: '[name].js'
   },
+  
   externals: [
     function (context, request, callback) {
       if (undefined === dependencies[request]) {
@@ -34,19 +37,45 @@ let config = {
   ],
   module: {
     rules: [
-      ...utils.styleLoaders({
-        sourceMap: !isProduction,
-        extract: isProduction
-      }),
+      {
+        test: /\.scss$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.sass$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader?indentedSyntax']
+      },
+      {
+        test: /\.less$/,
+        use: ['vue-style-loader', 'css-loader', 'less-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
+      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
+        test: /\.html$/,
+        use: 'vue-html-loader'
+      },
+      
+      {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
+        use: {
+          loader: 'vue-loader',
+          options: {
+            extractCSS: process.env.NODE_ENV === 'production',
+            loaders: {
+              sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
+              scss: 'vue-style-loader!css-loader!sass-loader',
+              less: 'vue-style-loader!css-loader!less-loader'
+            }
+          }
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -87,7 +116,7 @@ let config = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new ExtractTextWebpackPlugin('style.css'),
+    new MiniCssExtractPlugin({filename: 'styles.css'}),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join(__dirname, '../app/main/index.ejs'),
@@ -98,7 +127,7 @@ let config = {
       }
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }
 
@@ -112,5 +141,5 @@ if (isProduction) {
     })
   )
 }
-
+config.mode=isProduction?"production":"development"
 module.exports = config
