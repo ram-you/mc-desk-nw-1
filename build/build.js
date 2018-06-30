@@ -2,7 +2,9 @@ process.env.NODE_ENV = 'production'
 
 const fs = require('fs-extra')
 const path = require('path')
-const { spawn } = require('child_process')
+const {
+  spawn
+} = require('child_process')
 const npmWhich = require('npm-which')(__dirname)
 const webpack = require('webpack')
 
@@ -10,15 +12,15 @@ const webpackMainConfig = require('./webpack.main.config')
 
 const buildPath = npmWhich.sync('build')
 
-function cleanDist () {
+function cleanDist() {
   return fs.emptydir(path.resolve(__dirname, '../dist'))
 }
 
-function cleanBuild () {
+function cleanBuild() {
   return fs.emptydir(path.resolve(__dirname, '../releases'))
 }
 
-function distManifest () {
+function distManifest() {
   return new Promise((resolve, reject) => {
     fs.readJson(path.resolve(__dirname, '../app/package.json'), (err, data) => {
       if (err) reject(err)
@@ -33,7 +35,7 @@ function distManifest () {
   })
 }
 
-function distNodeModules () {
+function distNodeModules() {
   return new Promise((resolve, reject) => {
     const src = path.resolve(__dirname, '../app/node_modules')
     if (fs.existsSync(src)) {
@@ -47,21 +49,24 @@ function distNodeModules () {
   })
 }
 
-function packMain () {
+function packMain() {
   return pack(webpackMainConfig)
 }
 
-function pack (config) {
+function pack(config) {
   return new Promise((resolve, reject) => {
     webpack(config, (err, stats) => {
       if (err) reject(err)
-      else if (stats.hasErrors()) reject(stats.toString({ chunks: false, colors: true }))
+      else if (stats.hasErrors()) reject(stats.toString({
+        chunks: false,
+        colors: true
+      }))
       else resolve()
     })
   })
 }
 
-function build () {
+function build() {
   let os = ''
   let arch = ''
 
@@ -86,26 +91,29 @@ function build () {
       arch = '--x64'
   }
 
-  spawn(buildPath, [os, arch, 'dist'], { stdio: 'inherit' })
+  spawn(buildPath, [os, arch, 'dist'], {
+    stdio: 'inherit'
+  })
 }
 
-function buildToPlatform(){
+function buildToPlatform() {
   var NwBuilder = require('nw-builder');
-var nw = new NwBuilder({ 
-  appName:'mc-desk',
-  buildDir:'./buildFolder',
-  files: './dist/**/**', // use the glob format
-    platforms: ['win32', 'win64',  'linux64'] 
-});
+  var nw = new NwBuilder({
+    appName: 'mc-desk',
+    buildDir: './buildFolder',
+    files: './dist/**/**', // use the glob format
+    platforms: ['win32', 'win64', 'linux64'],
+    version: '0.31.4'
+  });
 
-// Log stuff you want
-nw.on('log',  console.log);
+  // Log stuff you want
+  nw.on('log', console.log);
 
-nw.build().then(function () {
-   console.log('all done!');
-}).catch(function (error) {
+  nw.build().then(function () {
+    console.log('all done!');
+  }).catch(function (error) {
     console.error(error);
-});
+  });
 }
 
 
