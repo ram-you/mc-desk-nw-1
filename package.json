@@ -5,6 +5,7 @@
     "build": "node build/build.js"
   },
   "devDependencies": {
+    "@mdi/font": "^2.4.85",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -18,7 +19,6 @@
     "fs-extra": "^6.0.1",
     "html-webpack-plugin": "^3.2.0",
     "less-loader": "^4.1.0",
-    "material-design-icons-iconfont": "^3.0.3",
     "mini-css-extract-plugin": "0.4.0",
     "node-sass": "^4.9.0",
     "npm-which": "^3.0.1",

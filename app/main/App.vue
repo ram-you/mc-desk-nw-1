@@ -1,19 +1,92 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
-  </div>
+  <v-app id="app"  >
+    <v-navigation-drawer v-model="drawer" fixed clipped app>
+      <v-list dense>
+        <v-list-tile v-for="item in items" :key="item.text">
+          <v-list-tile-action>
+            <v-icon>mdi-{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              {{ item.text }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-subheader class="mt-3 grey--text text--darken-1">SUBSCRIPTIONS</v-subheader>
+        <v-list>
+          <v-list-tile v-for="item in items2" :key="item.text" avatar>
+            <v-list-tile-avatar>
+              <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt="">
+            </v-list-tile-avatar>
+            <v-list-tile-title v-text="item.text"></v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+        <v-list-tile class="mt-3">
+          <v-list-tile-action>
+            <v-icon color="grey darken-1">mdi-plus-circle-outline</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title class="grey--text text--darken-1">Browse Channels</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon color="grey darken-1">mdi-settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title class="grey--text text--darken-1">Manage Subscriptions</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="red" dark dense fixed clipped-left app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-icon class="mx-3">mdi-youtube</v-icon>
+      <v-toolbar-title class="mr-5 align-center">
+        <span class="title">Youtube</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-layout row align-center style="max-width: 650px">
+        <v-text-field :append-icon-cb="() => {}" placeholder="Search..." single-line append-icon="mdi-magnify" color="white"
+          hide-details></v-text-field>
+      </v-layout>
+    </v-toolbar>
+    <v-content>
+      <v-container fill-height>
+        <v-layout justify-center align-center>
+    
+          <router-view></router-view>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: 'mc-desk-nw-1'
+  data: () => ({
+    drawer: false,
+    items: [
+      { icon: 'trending-up', text: 'Most Popular' },
+      { icon: 'animation-play', text: 'Subscriptions' },
+      { icon: 'history', text: 'History' },
+      { icon: 'format-list-numbers', text: 'Playlists' },
+      { icon: 'clock-outline', text: 'Watch Later' }
+    ],
+    items2: [
+      { picture: 28, text: 'Joseph' },
+      { picture: 38, text: 'Apple' },
+      { picture: 48, text: 'Xbox Ahoy' },
+      { picture: 58, text: 'Nokia' },
+      { picture: 78, text: 'MKBHD' }
+    ]
+  }),
+  props: {
+    source: String
+  }
 }
 </script>
 
+
 <style>
 #app {
-  font-family:'Roboto', 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
