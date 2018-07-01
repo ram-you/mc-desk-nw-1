@@ -103,7 +103,8 @@ function buildToPlatform() {
     buildDir: './buildFolder',
     files: './dist/**/**', // use the glob format
     platforms: ['win32', 'win64', 'linux64'],
-    version: '0.31.4'
+    version: '0.31.4',
+    cacheDir:"./cache"
   });
 
   // Log stuff you want

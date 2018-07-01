@@ -7,7 +7,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const webpackMainConfig = require('./webpack.main.config')
 
-const runPath = npmWhich.sync('run')
+const runPath = npmWhich.sync('run') 
 
 let nwProcess
 let nwRestarting = false
@@ -59,6 +59,8 @@ function startNw () {
   nwProcess.on('close', () => {
     process.exit()
   })
+
+ 
 }
 
 Promise

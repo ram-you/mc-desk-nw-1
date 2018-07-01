@@ -2,8 +2,7 @@ process.env.BABEL_ENV = 'main'
 
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin') 
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BabelMinifyWebpackPlugin = require('babel-minify-webpack-plugin')

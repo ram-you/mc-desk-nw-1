@@ -1,5 +1,4 @@
-const path = require('path')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const path = require('path') 
 
 exports.cssLoaders = function (options) {
   options = options || {}
@@ -23,17 +22,9 @@ exports.cssLoaders = function (options) {
         })
       })
     }
+ 
 
-    if (options.extract) {
-      // Extract CSS when that option is specified
-      // (which is the case during production build)
-      return ExtractTextWebpackPlugin.extract({
-        use: loaders,
-        fallback: 'vue-style-loader'
-      })
-    } else {
-      return ['vue-style-loader'].concat(loaders)
-    }
+    return ['vue-style-loader'].concat(loaders)
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
