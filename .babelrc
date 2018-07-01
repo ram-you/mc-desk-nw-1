@@ -1,14 +1,16 @@
+ 
+
 {
-  "comments": false,
-  "env": {
-    "main": {
-      "presets": [
-        ["env", {
-          "modules": false
-        }],
-        "stage-0"
-      ]
-    }
-  },
-  "plugins": ["transform-runtime"]
+  "plugins": ["transform-object-rest-spread"],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions", "safari >= 6"],
+          "node": 8
+        }
+      }
+    ]
+  ]
 }
