@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "node build/dev-runner.js",
     "build": "node build/build.js",
+    "build:all": "node build/new-build.js",
     "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
     "start": "run --x86 --mirror https://dl.nwjs.io/ ."
   },
@@ -42,5 +43,5 @@
   },
   "build": {
     "nwVersion": "0.31.4"
-}
+  }
 }

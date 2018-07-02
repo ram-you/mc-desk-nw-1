@@ -1,5 +1,5 @@
 {
-  "name": "mc-desk-nw-1",
+  "name": "mc-desk",
   "description": "A MEDIACEPT Technology desktop application",
   "version": "1.0.0",
   "author": "Ramzi Youssef <contact@mediacept.com>",
@@ -9,10 +9,33 @@
     "width": 1000,
     "height": 563
   },
+
+  "dependencies": {},
   "build": {
+    "appId": "com.mediacept.mc-desk",
     "nwVersion": "0.31.4",
-    "output": "../releases"
-  },
-  "dependencies": {
+    "nwFlavor": "sdk",
+    "output": "../releases",
+    "packed": true,
+    "targets": [ "zip", "nsis7z"],
+    "strippedProperties": ["build"],
+    "outputPattern": "${NAME} ${VERSION} ${PLATFORM} ${ARCH}",
+    "linux": {
+      "productName": "mc-desk",
+      "companyName": "mediacept",
+      "copyright": "copyright",
+      "icon": "./assets/mediacept-1-24x24.png"
+    },
+    "win": {
+      "companyName": "mediacept",
+      "description": "A MEDIACEPT Technology desktop application",
+      "copyright": "copyright",
+      "icon": "../assets/img/favicon.ico"
+    },
+    "nsis": {
+      "installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
+      "diffUpdaters": true,
+      "icon": "../assets/img/favicon.ico"
+    }
   }
 }
