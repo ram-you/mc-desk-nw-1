@@ -96,26 +96,7 @@ function build() {
   })
 }
 
-function buildToPlatform() {
-  var NwBuilder = require('nw-builder');
-  var nw = new NwBuilder({
-    appName: 'mc-desk',
-    buildDir: './buildFolder',
-    files: './dist/**/**', // use the glob format
-    platforms: ['win32', 'win64', 'linux64'],
-    version: '0.31.4',
-    cacheDir:"./cache"
-  });
-
-  // Log stuff you want
-  nw.on('log', console.log);
-
-  nw.build().then(function () {
-    console.log('all done!');
-  }).catch(function (error) {
-    console.error(error);
-  });
-}
+ 
 
 
 Promise
@@ -124,8 +105,7 @@ Promise
     Promise
       .all([distManifest(), distNodeModules(), packMain()])
       .then(() => {
-        build();
-        buildToPlatform()
+        build(); 
       })
       .catch((err) => {
         console.error(err)

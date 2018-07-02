@@ -3,9 +3,7 @@
   "scripts": {
     "dev": "node build/dev-runner.js",
     "build": "node build/build.js",
-    "build:all": "node build/new-build.js",
-    "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
-    "start": "run --x86 --mirror https://dl.nwjs.io/ ."
+    "build:all": "node build/new-build.js"
   },
   "devDependencies": {
     "@mdi/font": "^2.4.85",
@@ -23,8 +21,7 @@
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "0.4.1",
     "node-sass": "^4.9.0",
-    "npm-which": "^3.0.1",
-    "nw-builder": "^3.5.4",
+    "npm-which": "^3.0.1", 
     "nwjs-builder-phoenix": "^1.14.6",
     "sass-loader": "^7.0.3",
     "typeface-roboto": "0.0.54",
