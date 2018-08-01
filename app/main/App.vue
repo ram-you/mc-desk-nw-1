@@ -43,15 +43,14 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-layout row align-center style="max-width: 650px">
-        <v-text-field :append-icon-cb="() => {}" placeholder="Search..." single-line append-icon="mdi-magnify" color="white"
+        <v-text-field @click:append="() => {}" placeholder="Search..." single-line append-icon="mdi-magnify" color="white"
           hide-details></v-text-field>
       </v-layout>
     </v-toolbar>
     <v-content>
       <v-container fill-height>
         <v-layout justify-center align-center>
-    
-          <router-view></router-view>
+              <router-view/>
         </v-layout>
       </v-container>
     </v-content>
@@ -77,20 +76,61 @@ export default {
       { picture: 78, text: 'MKBHD' }
     ]
   }),
-  props: {
-    source: String
-  }
+ mounted(){
+
+ }
 }
 </script>
 
 
+
 <style>
-#app {
-  font-family: "Roboto", "Avenir", Helvetica, Arial, sans-serif;
+.application {
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.application:not(.application--is-rtl) {
+  font-family: "Ubuntu" !important;
+}
+
+/* .application:not(.application--is-rtl)  [class*="-fontFamily"]   {
+  font-family: "Ubuntu" !important;
+} */
+
+.application.application--is-rtl {
+  font-family: "Tajawal" !important;
+  direction: rtl;
+}
+
+.application.application--is-rtl .v-navigation-drawer *,
+.application.application--is-rtl .v-menu__content * {
+  text-align: right;
+}
+
+.application.application--is-rtl .v-input__prepend-outer {
+  margin-left: 9px;
+  margin-right: 0px;
+}
+.ar-fontFamily {
+  font-family: "Tajawal" !important;
+}
+.en-fontFamily,
+.fr-fontFamily {
+  font-family: "Ubuntu" !important;
+}
+.v-card {
+  text-align: initial;
+}
+.hidden-div {
+    display: none !important;
+    height: 0px !important;
+    width: 0px !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    top: -10000px !important;
+    overflow: hidden !important;
 }
 </style>

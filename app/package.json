@@ -8,8 +8,7 @@
   "window": {
     "width": 1000,
     "height": 563
-  },
-
+  }, 
   "dependencies": {},
   "build": {
     "appId": "com.mediacept.mc-desk",

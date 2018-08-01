@@ -5,13 +5,24 @@
     "build": "node build/build.js",
     "build:all": "node build/new-build.js"
   },
-  "devDependencies": {
+ 
+  "dependencies": {
     "@mdi/font": "^2.5.94",
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "animejs": "^2.2.0",
+    "assert": "^1.4.1",
+    "lodash": "^4.17.10",
+    "nedb": "^1.8.0",
+    "vue-i18n": "^8.0.0",
+    "vuetify": "^1.1.9"
+  },
+  "devDependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-imports": "^1.5.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^1.0.0",
@@ -24,6 +35,9 @@
     "npm-which": "^3.0.1",
     "nwjs-builder-phoenix": "^1.14.8",
     "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "typeface-roboto": "0.0.54",
     "url-loader": "^1.0.1",
     "vue": "^2.5.16",
@@ -32,7 +46,6 @@
     "vue-router": "^3.0.1",
     "vue-style-loader": "^4.1.1",
     "vue-template-compiler": "^2.5.16",
-    "vuetify": "^1.1.9",
     "vuex": "^3.0.1",
     "webpack": "^4.16.3",
     "webpack-dev-server": "^3.1.5",

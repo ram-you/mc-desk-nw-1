@@ -2,9 +2,7 @@ process.env.NODE_ENV = 'production'
 
 const fs = require('fs-extra')
 const path = require('path')
-const {
-  spawn
-} = require('child_process')
+const { spawn } = require('child_process')
 const npmWhich = require('npm-which')(__dirname)
 const webpack = require('webpack')
 
@@ -96,7 +94,7 @@ function build() {
   })
 }
 
- 
+
 
 
 Promise
@@ -105,7 +103,7 @@ Promise
     Promise
       .all([distManifest(), distNodeModules(), packMain()])
       .then(() => {
-        build(); 
+        build();
       })
       .catch((err) => {
         console.error(err)

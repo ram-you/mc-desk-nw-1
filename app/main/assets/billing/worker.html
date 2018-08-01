@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <style>
+    body {
+      page-break-before: always;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const fs = require('fs')
+    const os = require('os')
+    const path = require('path')
+    const ipcRenderer = require("electron").ipcRenderer;
+    const isDevelopment = process.env.NODE_ENV !== 'production';
+
+    function addCss(cssCode) {
+      var styleElement = document.createElement("style");
+      styleElement.type = "text/css";
+      if (styleElement.styleSheet) {
+        styleElement.styleSheet.cssText = cssCode;
+      } else {
+        styleElement.appendChild(document.createTextNode(cssCode));
+      }
+      document.getElementsByTagName("head")[0].appendChild(styleElement);
+    }
+
+    ipcRenderer.on("printPDF", (event, ID, content, theme) => {
+      document.body.innerHTML = content;
+
+      let assetsFolder = isDevelopment ? ('./theme/' + theme + '/') : ('/../../../../resources/assets/billing/theme/' + theme + '/')
+      var cssCode = "@font-face { font-family: 'SourceSansPro';src: url('" + assetsFolder + "SourceSansPro-Regular.ttf');"
+      addCss(cssCode)
+      let indexCss = path.join(__dirname, assetsFolder + 'index.css')
+      console.log(indexCss)
+      fs.readFile(indexCss, "utf-8", function(error, data) {
+        if (!error) {
+          var formatedData = data.replace(/\s{2,10}/g, ' ').trim()
+          // printWorkerWindow.webContents.insertCSS(formatedData)
+          addCss(formatedData)
+
+        }
+
+        setTimeout(() => {
+          ipcRenderer.send("readyToPrintPDF", ID);
+        }, 100);
+      })
+
+    });
+
+    // ===
+    ipcRenderer.on("print", (event, ID, content, theme,printer) => {
+      document.body.innerHTML = content;
+
+      let assetsFolder = isDevelopment ? ('./theme/' + theme + '/') : ('/../../../../resources/assets/billing/theme/' + theme + '/')
+      var cssCode = "@font-face { font-family: 'SourceSansPro';src: url('" + assetsFolder + "SourceSansPro-Regular.ttf');"
+      addCss(cssCode)
+      let indexCss = path.join(__dirname, assetsFolder + 'index.css')
+      console.log(indexCss)
+      fs.readFile(indexCss, "utf-8", function(error, data) {
+        if (!error) {
+          var formatedData = data.replace(/\s{2,10}/g, ' ').trim()
+          // printWorkerWindow.webContents.insertCSS(formatedData)
+          addCss(formatedData)
+
+        }
+
+        setTimeout(() => {
+          ipcRenderer.send("readyToPrint", ID, printer);
+        }, 100);
+      })
+
+    });
+  </script>
+</body>
+
+</html>
